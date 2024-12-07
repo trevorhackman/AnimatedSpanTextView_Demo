@@ -18,9 +18,9 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 
 /**
- * Inspired by http://chiuki.github.io/advanced-android-textview/#/41.
+ * Learned from http://chiuki.github.io/advanced-android-textview/#/41.
  *
- * An extension of TextView that allows animating a span of text.
+ * An extension of TextView that allows colorfully animating a span of text.
  * It will cancel once the view is detached from the window.
  * It will stop when the activity is backgrounded and restart when foregrounded.
  */
@@ -69,7 +69,7 @@ class AnimatedSpanTextView @JvmOverloads constructor(
             setSpan(span, spanStart, spanEnd, 0)
         }
 
-        // Queuing is necessary for animateSpan to work before the view is attached to window.
+        // Queuing is done so animateSpan can be called in advance but the animation won't run until the view is attached to window.
         if (isAttachedToWindow) {
             startLoopingRunnable(span, spannableString)
         } else {
@@ -119,7 +119,7 @@ class AnimatedSpanTextView @JvmOverloads constructor(
     private fun startLoopingRunnable(span: AnimatedColorSpan, spannableString: SpannableString) {
         object : Runnable {
             override fun run() {
-                // This is critical to stop the loop when the view is gone.
+                // This stops the loop when the view is detached and prevents it from running before the view is attached.
                 if (!isAttachedToWindow) return
 
                 text = spannableString
