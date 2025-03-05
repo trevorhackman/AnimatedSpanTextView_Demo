@@ -176,8 +176,8 @@ class AnimatedSpanTextView @JvmOverloads constructor(
     }
 
     companion object {
-        private val DEFAULT_COLORS = intArrayOf(Color.RED, Color.GREEN, Color.BLUE)
-        private const val DEFAULT_DURATION_MS = 10_000L
-        private const val DEFAULT_DELAY_MS = 0L
+        val DEFAULT_COLORS = intArrayOf(Color.RED, Color.GREEN, Color.BLUE)
+        const val DEFAULT_DURATION_MS = 10_000L
+        const val DEFAULT_DELAY_MS = 0L
     }
 }
